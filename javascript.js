@@ -34,3 +34,20 @@ function operate(operator, var1, var2) {
         return divide(var1, var2);
     }
 }
+
+const display = document.querySelector(".display");
+
+
+function calcDisplay() {
+    display.textContent = `Hello World!`;
+}
+
+calcDisplay()
+
+function clear() {
+    display.textContent = ``;
+}
+
+const clearbtn = document.querySelector(".clear");
+clearbtn.addEventListener("click", clear);
+
