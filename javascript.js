@@ -37,23 +37,37 @@ function operate(operator, var1, var2) {
 
 const display = document.querySelector(".display");
 
+const keypad = document.querySelector("#keypad");
+const numBtn = keypad.querySelectorAll(".numKey");
+let variable = '';
+let decimalAdded = false;
+
+// numBtn.forEach(button => {
+//     button.addEventListener("click", () => {
+//         variable += button.textContent;
+//         display.textContent = variable;
+//     })
+// })
+
+
 //Calculator Display
 function calcDisplay(num) {
-    variable = num;
-    return display.textContent = `${num}`;
+    variable += num;
+    return display.textContent = `${variable}`;
+
     // console.log(`${num}`);
 }
 
-// calcDisplay("Hello World!")
-
+// Clear button:
 function clear() {
     display.textContent = ``;
+    variable = ``;
+    decimalAdded = false;
 }
-
 const clearBtn = document.querySelector(".clear");
 clearBtn.addEventListener("click", clear);
 
-const keypad = document.querySelector("#keypad");
+// const keypad = document.querySelector("#keypad"); //added on line 40
 // const numBtn = keypad.querySelector("button");
 
 // numBtn.addEventListener("click", )
@@ -78,17 +92,40 @@ nine.addEventListener("click", () => {calcDisplay(9)});
 const zero = keypad.querySelector("#zero");
 zero.addEventListener("click", () => {calcDisplay(0)});
 
-function storeNum1() {
-    let a = var1;
-    
-    return operate(op, a, b)
-}
-
-const operator = keypad.querySelectorAll("#operator")
-function operate() {
-    if (operator == "/") {
-
+const decimal = keypad.querySelector("#decimal");
+decimal.addEventListener("click", () => {
+    if (!decimalAdded) {
+    calcDisplay(`.`);
+    decimalAdded = true;
     }
+});
 
-}
+// const operator = keypad.querySelector("#operator");
+// operator.addEventListener("click", () => {operate()});
+
+// const divide = keypad.querySelector(".divide");
+// divide.addEventListener("click", () => {calcDisplay(`/`)});
+// const multiply = keypad.querySelector(".multiply");
+// multiply.addEventListener("click", () => {calcDisplay(`*`)});
+// const add = keypad.querySelector(".add");
+// add.addEventListener("click", () => {calcDisplay(`+`)});
+// const minus = keypad.querySelector("#minus");
+// minus.addEventListener("click", () => {calcDisplay(`-`)});
+// const equal = keypad.querySelector("#equal");
+// equal.addEventListener("click", () => {calcDisplay(`=`)});
+
+
+// function storeNum1() {
+//     let a = var1;
+    
+//     return operate(op, a, b)
+// }
+
+// // const operator = keypad.querySelectorAll("#operator")
+// function operate() {
+//     if (operator == "/") {
+
+//     }
+
+// }
 
