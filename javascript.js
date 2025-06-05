@@ -57,9 +57,12 @@ function clear() {
 // Store variables:
 function storeVar(num) {
     let newNum = parseFloat(parseFloat(num).toFixed(2)); //converts to number
-    if (firstVar !== null && addOperator !== null) {
+    if (firstVar !== null && addOperator !== null && secondVar === null) {
         secondVar = newNum;
         return secondVar;
+      } else if (secondVar !== null) {
+        firstVar = newNum; //replace firstVar
+        return firstVar;
     } else {
         firstVar = newNum;
         return firstVar;
@@ -72,6 +75,11 @@ operators.forEach((operate) => {
         if (!addOperator) {
             clear(); 
             addOperator = operate.className; 
+        } 
+        else {
+            clear();
+            secondVar = null; //to clear and replace secondVar
+            addOperator = operate.className;
         }
         return addOperator;
     })
@@ -109,6 +117,8 @@ function calculate() {
         display.textContent = `${result}`;
         console.log(firstVar); //check
         console.log(secondVar); //check
+        console.log(result); //check
+        storeVar(result);
 }
 
 // Keypad numbers:
