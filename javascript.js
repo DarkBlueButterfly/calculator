@@ -81,7 +81,7 @@ operators.forEach((operate) => {
 const equal = keypad.querySelector("#equal");
 equal.addEventListener("click", () => {
     calculate();
-    // console.log(addOperator) //check
+    console.log(addOperator) //check
 });
 function calculate() {
     const a = parseFloat(parseFloat(firstVar).toFixed(2));
@@ -104,10 +104,11 @@ function calculate() {
             default:
                 return null;
         }
+        clear();
         result = parseFloat(parseFloat(result).toFixed(2));
         display.textContent = `${result}`;
-        // console.log(firstVar); //check
-        // console.log(secondVar); //check
+        console.log(firstVar); //check
+        console.log(secondVar); //check
 }
 
 // Keypad numbers:
