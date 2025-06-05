@@ -42,8 +42,9 @@ const keypad = document.querySelector("#keypad");
 const numBtn = keypad.querySelectorAll(".numKey");
 let variable = '';
 let decimalAdded = false;
-let addOperate = false;
-let firstVar = true;
+let addOperator = null;
+let firstVar = null;
+let secondVar = null;
 
 // numBtn.forEach(button => {
 //     button.addEventListener("click", () => {
@@ -65,55 +66,78 @@ function calcDisplay(num) {
 // console.log(variable)
 
 // Clear button:
+function clearAll() {
+    display.textContent = ``;
+    variable = ``;
+    decimalAdded = false;
+    addOperator = null; //add to button click instead...? nvm
+    firstVar = null;
+    secondVar = null;
+}
+const clearBtn = document.querySelector(".clear");
+clearBtn.addEventListener("click", clearAll);
+
+//to not clear everything
 function clear() {
     display.textContent = ``;
     variable = ``;
     decimalAdded = false;
-    // addOperate = false; //add to button click
+    // addOperator = null; //add to button click instead...? nvm
+    // firstVar = null;
+    // secondVar = null;
 }
-const clearBtn = document.querySelector(".clear");
-clearBtn.addEventListener("click", clear);
 
-//Store numbers: 
+// Store numbers: is this needed? since there are already variables declared!
+// yes it was needed!
 function storeVar(num) {
     // let var1 = 0;
     // let var2 = 0;
     let newNum = parseFloat(parseFloat(num).toFixed(2)); //changed to numbers
-    if (firstVar === true) {
-        // var1 = newNum;
-        firstVar = false;
-        // return var1; 
-        return newNum;
+    // if (firstVar === null && addOperator === null) {
+    //     // firstVar = parseFloat(parseFloat(variable).toFixed(2));
+    //     firstVar = newNum;
+    //     // firstVar = false;
+    //     // return var1; 
+    //     return firstVar;  //needed?
+    // } else if(firstVar !== null && addOperator !== null) {
+    //     // calculate() //
+    //     secondVar = newNum;
+    //     // console.log(var2); //check
+    //     return secondVar;
+    //     // storeVar2(newNum); //might not be needed
+    // }
+    //try this! it works!!
+    if (firstVar !== null && addOperator !== null) {
+        secondVar = newNum;
+        return secondVar;
     } else {
-        // calculate() //
-        // var2 = newNum;
-        // console.log(var2); //check
-        // return var2;
-        storeVar2(newNum);
+        firstVar = newNum;
+        return firstVar;
     }
     // return var1;
     // calculate(var1, var2); 
 }
 
-function storeVar2(num) {
-    let newNum = parseFloat(parseFloat(num).toFixed(2));
-    return newNum;
-}
+// function storeVar2(num) {
+//     let newNum = parseFloat(parseFloat(num).toFixed(2));
+//     return newNum;
+// }
 
 //Operator function: to store the operators?
 const operators = keypad.querySelectorAll("#operator");
 // function operator() {
     operators.forEach((operate) => {
         operate.addEventListener("click", () => {
-            let button = operate.className;
+            // let button = operate.className;
+            // addOperator = operate.className; //changed this oops should be in the if
             // clear the display after the click
             // display.textContent = ``; 
             // clear();
-            if (!addOperate) {
-                clear();
-                addOperate = true; //
+            if (!addOperator) {
+                clear(); //Done - might need to change this so it doesn't reset everything...
+                addOperator = operate.className; //should be here!?
             }
-            return button;
+            return addOperator;
             // console.log(button); //can change your operator?
             // calculate(); //should be activated when "=" is pressed
         })
@@ -135,12 +159,15 @@ const operators = keypad.querySelectorAll("#operator");
 const equal = keypad.querySelector("#equal");
 equal.addEventListener("click", () => {
     calculate();
-    console.log("hi?")
+    console.log(addOperator) //check
 });
 function calculate() {
-    const a = storeVar();
-    const b = storeVar();
-    const op = operator();
+    // const a = storeVar();
+    // const b = storeVar();
+    const a = parseFloat(parseFloat(firstVar).toFixed(2));     //copied
+    const b = parseFloat(parseFloat(secondVar).toFixed(2));    //copied
+    const op = addOperator;
+    // const op = operate(); //need to fix
     let result = 0;
     // if () {
         switch (op) {
@@ -157,9 +184,12 @@ function calculate() {
                 result = divide(a, b);
                 break;
             default:
-                return;
+                return null;
         }
+        result = parseFloat(parseFloat(result).toFixed(2));
         display.textContent = `${result}`;
+        console.log(firstVar); //check
+        console.log(secondVar); //check
 //     }
 }
 
