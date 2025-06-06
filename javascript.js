@@ -27,6 +27,7 @@ let decimalAdded = false;
 let addOperator = null;
 let firstVar = null;
 let secondVar = null;
+let nextRound = false;
 
 //Calculator Display
 function calcDisplay(num) {
@@ -43,6 +44,7 @@ function clearAll() {
     addOperator = null; 
     firstVar = null;
     secondVar = null;
+    nextRound = false;
 }
 const clearBtn = document.querySelector(".clear");
 clearBtn.addEventListener("click", clearAll);
@@ -57,14 +59,17 @@ function clear() {
 // Store variables:
 function storeVar(num) {
     let newNum = parseFloat(parseFloat(num).toFixed(2)); //converts to number
-    if (firstVar !== null && addOperator !== null && secondVar === null) {
+    // console.log(secondVar); //check
+    if (firstVar !== null && addOperator !== null) { 
         secondVar = newNum;
         return secondVar;
-      } else if (secondVar !== null) {
+      } else if (nextRound != true) { 
         firstVar = newNum; //replace firstVar
+        // console.log(`firstVar = ${firstVar}`); // check
         return firstVar;
-    } else {
+    } else { 
         firstVar = newNum;
+        // console.log(`firstVar/results = ${firstVar}`); // check
         return firstVar;
     }
 }
@@ -72,15 +77,8 @@ function storeVar(num) {
 const operators = keypad.querySelectorAll("#operator");
 operators.forEach((operate) => {
     operate.addEventListener("click", () => {
-        if (!addOperator) {
             clear(); 
             addOperator = operate.className; 
-        } 
-        else {
-            clear();
-            secondVar = null; //to clear and replace secondVar
-            addOperator = operate.className;
-        }
         return addOperator;
     })
 })
@@ -115,9 +113,12 @@ function calculate() {
         clear();
         result = parseFloat(parseFloat(result).toFixed(2));
         display.textContent = `${result}`;
-        console.log(firstVar); //check
-        console.log(secondVar); //check
-        console.log(result); //check
+        console.log(`firstVar = ${firstVar}`); //check
+        console.log(`secondVar = ${secondVar}`); //check
+        console.log(`result = ${result}`); //check
+        console.log(`${firstVar} ${addOperator} ${secondVar} = ${result}`) //check
+        nextRound = true;
+        firstVar = null; //clear old number
         storeVar(result);
 }
 
