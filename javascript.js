@@ -20,6 +20,7 @@ function divide(a, b) {
 }
 
 const display = document.querySelector(".display");
+const topDisplay = document.querySelector(".topDisplay");
 const keypad = document.querySelector("#keypad");
 const numBtn = keypad.querySelectorAll(".numKey");
 let variable = '';
@@ -39,6 +40,7 @@ function calcDisplay(num) {
 // Reset button:
 function clearAll() {
     display.textContent = ``;
+    topDisplay.textContent = ``;
     variable = ``;
     decimalAdded = false;
     addOperator = null; 
@@ -52,6 +54,7 @@ clearBtn.addEventListener("click", clearAll);
 //Clear display
 function clear() {
     display.textContent = ``;
+    topDisplay.textContent = ``;
     variable = ``;
     decimalAdded = false;
 }
@@ -87,7 +90,7 @@ operators.forEach((operate) => {
 const equal = keypad.querySelector("#equal");
 equal.addEventListener("click", () => {
     calculate();
-    console.log(addOperator) //check
+    // console.log(addOperator) //check
 });
 function calculate() {
     const a = parseFloat(parseFloat(firstVar).toFixed(2));
@@ -97,15 +100,19 @@ function calculate() {
         switch (op) {
             case "add":
                 result = add(a, b);
+                addOperator = `+`;
                 break;
             case "minus":
                 result = subtract(a, b);
+                addOperator = `-`
                 break;
             case "multiply":
                 result = multiply(a, b);
+                addOperator = `*`
                 break;
             case "divide":
                 result = divide(a, b);
+                addOperator = `÷`
                 break;
             default:
                 return null;
@@ -113,10 +120,11 @@ function calculate() {
         clear();
         result = parseFloat(parseFloat(result).toFixed(2));
         display.textContent = `${result}`;
-        console.log(`firstVar = ${firstVar}`); //check
-        console.log(`secondVar = ${secondVar}`); //check
-        console.log(`result = ${result}`); //check
+        // console.log(`firstVar = ${firstVar}`); //check
+        // console.log(`secondVar = ${secondVar}`); //check
+        // console.log(`result = ${result}`); //check
         console.log(`${firstVar} ${addOperator} ${secondVar} = ${result}`) //check
+        topDisplay.textContent = `${firstVar} ${addOperator} ${secondVar} =`;
         nextRound = true;
         firstVar = null; //clear old number
         storeVar(result);
