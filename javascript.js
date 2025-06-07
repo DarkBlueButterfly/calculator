@@ -69,6 +69,15 @@ function deleteNum() {
     storeVar(variable);
 }
 
+//CE (Clear Entry)
+const CE = document.querySelector(".CE");
+CE.addEventListener("click", clearEntry);
+function clearEntry() {
+    variable = ``;
+    display.textContent = `${variable}`;
+    storeVar(variable);
+}
+
 // Store variables:
 function storeVar(num) {
     let newNum = parseFloat(parseFloat(num).toFixed(2)); //converts to number
