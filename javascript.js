@@ -65,7 +65,6 @@ deleteBtn.addEventListener("click", deleteNum);
 function deleteNum() {
     variable = variable.slice(0, -1);
     display.textContent = `${variable}`;
-    // console.log(variable) //check
     storeVar(variable);
 }
 
@@ -81,17 +80,14 @@ function clearEntry() {
 // Store variables:
 function storeVar(num) {
     let newNum = parseFloat(parseFloat(num).toFixed(2)); //converts to number
-    // console.log(secondVar); //check
     if (firstVar !== null && addOperator !== null) { 
         secondVar = newNum;
         return secondVar;
       } else if (nextRound != true) { 
         firstVar = newNum; //replace firstVar
-        // console.log(`firstVar = ${firstVar}`); // check
         return firstVar;
     } else { 
         firstVar = newNum;
-        // console.log(`firstVar/results = ${firstVar}`); // check
         return firstVar;
     }
 }
@@ -109,7 +105,6 @@ operators.forEach((operate) => {
 const equal = keypad.querySelector("#equal");
 equal.addEventListener("click", () => {
     calculate();
-    // console.log(addOperator) //check
 });
 function calculate() {
     const a = parseFloat(parseFloat(firstVar).toFixed(2));
@@ -139,9 +134,6 @@ function calculate() {
         clear();
         result = parseFloat(parseFloat(result).toFixed(2));
         display.textContent = `${result}`;
-        // console.log(`firstVar = ${firstVar}`); //check
-        // console.log(`secondVar = ${secondVar}`); //check
-        // console.log(`result = ${result}`); //check
         console.log(`${firstVar} ${addOperator} ${secondVar} = ${result}`) //check
         topDisplay.textContent = `${firstVar} ${addOperator} ${secondVar} =`;
         nextRound = true;
