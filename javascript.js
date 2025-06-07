@@ -59,6 +59,16 @@ function clear() {
     decimalAdded = false;
 }
 
+//Delete button:
+const deleteBtn = document.querySelector(".delete");
+deleteBtn.addEventListener("click", deleteNum);
+function deleteNum() {
+    variable = variable.slice(0, -1);
+    display.textContent = `${variable}`;
+    // console.log(variable) //check
+    storeVar(variable);
+}
+
 // Store variables:
 function storeVar(num) {
     let newNum = parseFloat(parseFloat(num).toFixed(2)); //converts to number
