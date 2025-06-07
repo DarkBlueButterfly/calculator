@@ -200,3 +200,6 @@ document.addEventListener("keydown", (e) => {
         deleteNum();
     } 
 });
+
+const footer = document.querySelector("#footer");
+footer.textContent = `Copyright © `+ (new Date().getFullYear()) + ` DarkBlueButterfly`;

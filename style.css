@@ -6,8 +6,15 @@
 
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#header {
+    height: 70px;
+    align-content: center;
+    color: #5643CC;
 }
 
 #container {
@@ -80,3 +87,6 @@ body {
     transition: all .5s;
 }
 
+#footer {
+    color: #455EB5;
+}
