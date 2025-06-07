@@ -178,3 +178,33 @@ decimal.addEventListener("click", () => {
     decimalAdded = true;
     }
 });
+
+//Keyboard support:
+document.addEventListener("keydown", (e) => {
+    if (Number(`${e.key}`)) { 
+        calcDisplay(`${e.key}`); 
+    } else if (`${e.key}` === `0`) { 
+        calcDisplay(`${e.key}`);
+    } else if (`${e.key}` === `.`) {
+        if (!decimalAdded) {
+            calcDisplay(`.`);
+            decimalAdded = true;
+        }
+    } else if (`${e.key}` === `+`) {
+        clear();
+        addOperator = `add`;
+    } else if (`${e.key}` === `-`) {
+        clear(); 
+        addOperator = `minus`;
+    } else if (`${e.key}` === `*`) {
+        clear();
+        addOperator = `multiply`;
+    } else if (`${e.key}` === `/`) {
+        clear();
+        addOperator = `divide`;
+    } else if (`${e.key}` === `=` || `${e.key}` === `Enter`) {
+        calculate();
+    } else if (`${e.key}` === `Backspace`) {
+        deleteNum();
+    } 
+});
